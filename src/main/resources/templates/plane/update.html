@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>机票预定系统</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+	<!--顶部导航栏-->
+	<div th:insert="~{/common/c-commons::topbar}"/>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 侧边栏-->
+				<div th:insert="~{/common/a-commons::siderbar(active='p-list.html')}"/>
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<form th:action="@{/updatePlane/{id}/(id=${plane.getPlaneid()})}" method="post">
+						<div class="form-group">
+							<label>飞机编号</label>
+							<input th:value="${plane.getPlaneid()}" type="text" name="planeId" class="form-control" readonly="true"/>
+						</div>
+						<div class="form-group">
+							<label>公司</label>
+							<input th:value="${plane.getCompany()}" type="text" name="company" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>座位</label>
+							<input th:value="${plane.getSeat()}" type="text" name="seat" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>航线id</label>
+							<input type="text" name="lineid" class="form-control" placeholder="如:p1111">
+						</div>
+						<div class="form-group">
+							<label>出发时间</label>
+							<input type="datetime-local" name="begintime" />
+						</div>
+						<div class="form-group">
+							<label>到达时间</label>
+							<input type="datetime-local" name="arrivetime" />
+						</div>
+						<div class="form-group">
+							<label>价格</label>
+							<input type="text" name="price" class="form-control" placeholder="如:500">
+						</div>
+						<button type="submit" class="btn btn-primary">修改</button>
+					</form>
+				</main>
+			</div>
+		</div>
+
+	</body>
+
+</html>

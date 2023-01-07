@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>机票预定系统</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+	<!--顶部导航栏-->
+	<div th:insert="~{/common/a-commons::topbar}"/>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 侧边栏-->
+				<div th:insert="~{/common/a-commons::siderbar(active='a-list.html')}"/>
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<h2><a class="btn btn-sm btn-success" th:href="@{/toAddLine}">添加航线</a></h2>
+					<div class="table-responsive">
+						<table class="table table-striped table-sm">
+							<thead>
+								<tr>
+									<th>航线编号</th>
+									<th>出发地</th>
+									<th>目的地</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="line:${lines}">
+									<td th:text="${line.getLineid()}"></td>
+									<td th:text="${line.getBeginplace()}"></td>
+									<td th:text="${line.getEndplace()}"></td>
+									<td>
+										<a class="btn-group-sm btn-primary" th:href="@{/toUpdateLine/{id}/(id=${line.getLineid()})}">编辑</a>
+										<a class="btn-group-sm btn-danger" th:href="@{/deleteLine/{id}/(id=${line.getLineid()})}">删除</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</main>
+			</div>
+		</div>
+	</body>
+</html>

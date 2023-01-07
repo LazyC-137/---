@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>机票预定系统</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+	<!--顶部导航栏-->
+	<div th:insert="~{/common/c-commons::topbar}"/>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 侧边栏-->
+				<div th:insert="~{/common/c-commons::siderbar(active='o-list.html')}"/>
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<h2><a>我的订单</a></h2>
+					<div class="table-responsive">
+						<table class="table table-striped table-sm">
+							<thead>
+								<tr>
+									<th>订单编号</th>
+									<th>航线编号</th>
+									<th>飞机编号</th>
+									<th>出发时间</th>
+									<th>到达时间</th>
+									<th>价格</th>
+									<th>出发地</th>
+									<th>目的地</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="ticket:${tickets}">
+									<td th:text="${ticket.getTicketId()}"></td>
+									<td th:text="${ticket.getLineId()}"></td>
+									<td th:text="${ticket.getPlaneId()}"></td>
+									<td th:text="${ticket.getBeginTime()}"></td>
+									<td th:text="${ticket.getArriveTime()}"></td>
+									<td th:text="${ticket.getPrice()}"></td>
+									<td th:text="${ticket.getBeginPlace()}"></td>
+									<td th:text="${ticket.getEndPlace()}"></td>
+									<td>
+										<a class="btn-group-sm btn-danger" onclick="warn()" th:href="@{/deleteTicket/{id}/(id=${ticket.getTicketId()})}">取消订单</a>
+										<script type="text/javascript">
+											function warn(){
+												alert("确定取消订单吗")
+											}
+										</script>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</main>
+			</div>
+		</div>
+	</body>
+</html>

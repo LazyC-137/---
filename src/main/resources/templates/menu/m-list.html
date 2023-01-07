@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>机票预定系统</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+	<!--顶部导航栏-->
+	<div th:insert="~{/common/c-commons::topbar}"/>
+		<div class="container-fluid">
+			<div class="row">
+				<!-- 侧边栏-->
+				<div th:insert="~{/common/c-commons::siderbar(active='c-list.html')}"/>
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<tr>
+						<form name="sub" action="" >
+							出发地:<input  type="text" name="beginPlace" id="beginPlace">
+							目的地:<input  type="text" name="endPlace" id="endPlace">
+							日期:<input  type="date" name="date" id="date">
+							<a class="btn btn-sm btn-success" onclick="window.sub.action='searchMenu';sub.submit()" type=button>查询</a>
+						</form>
+					</tr>
+					<pre></pre>
+					<div class="table-responsive">
+						<table class="table table-striped table-sm">
+							<thead>
+								<tr>
+									<th>航线编号</th>
+									<th>航班编号</th>
+									<th>出发地</th>
+									<th>目的地</th>
+									<th>公司</th>
+									<th>剩余票数</th>
+									<th>出发时间</th>
+									<th>到达时间</th>
+									<th>价格</th>
+								</tr>
+							</thead>
+							<tbody>
+							<tr th:each="menu:${Menus}">
+								<td th:text="${menu.getLineId()}"></td>
+								<td th:text="${menu.getPlaneId()}"></td>
+								<td th:text="${menu.getBeginPlace()}"></td>
+								<td th:text="${menu.getEndPlace()}"></td>
+								<td th:text="${menu.getCompany()}"></td>
+								<td th:text="${menu.getSeat()}"></td>
+								<td th:text="${menu.getBeginTime()}"></td>
+								<td th:text="${menu.getArriveTime()}"></td>
+								<td th:text="${menu.getPrice()}"></td>
+								<td>
+									<a class="btn-group-sm btn-primary" th:href="@{/schedule/{id}/(id=${menu.getPlaneId()})}"/>预订</a>
+								</td>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</main>
+			</div>
+		</div>
+
+	</body>
+
+</html>
